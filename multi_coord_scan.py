@@ -4,6 +4,8 @@ from subprocess import Popen
 from time import sleep
 import cclib
 
+command = "rung09_quiet"# give your submission script
+
 def tail(f,BLOCK_SIZE = 256):
     f.seek(0,2)
     size = f.tell()
@@ -116,8 +118,7 @@ def main():
                 stdinput.append(line)
             if "multicoord" in line:
                 MCsection = True
-    
-    command = "rung09_quiet"# rung09-backend-D
+
     stdinput = stdinput[:-2]
     coordinates = []
     steps = 0

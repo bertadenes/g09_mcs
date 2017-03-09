@@ -1,0 +1,60 @@
+Description
+
+This python utility offers simultaneus PES scan of intrinsic coordinates. It is not to be mistaken with the
+multidimensinal PES scanning provided by opt(modred) keyword of Gaussian 09. The scan goes along only 1 dimension.
+Technically a sequence of two-step scans are performed advancing by all given coordinates maintaining the others.
+The program creates an xyz file including the geometries and SCF energies (in kcal/mol) for each complete step.
+
+Dependencies
+
+The program uses python3 environment and some of its packages, as well as cclib package version 1.4.
+Obviously, in order to perform the calculation one must have access to Gaussian (09) suite.
+
+Help for dependencies
+
+Python3
+Download the latest python environment (3.x.x)
+extract tarball:
+tar xf Python-3.*.tar.xz
+configure python:
+cd Python-3.*.tar.xz ./configure --prefix=$HOME
+compile:
+make
+make test
+make install
+define pythonpath: NOTE: local can be .local instead
+echo "export PYTHONPATH="${PYTHONPATH}:/home/berta/local/lib/python3.*/site-packages"" >> $HOME/.bashrc
+. $HOME/.bashrc
+Now you have easy_install-3.*
+cclib 1.4(!)
+easy_install-3.* --prefix=$HOME/local cclib-1.4
+
+Installation and configuration
+
+Download the script from https://github.com/bertadenes/g09_mcs.
+You might have to specify the permissions:
+chmod +x multi_coord_scan.py
+Place the file in your bin, add to your PATH or create a symlink.
+A command for gaussian submission must be given. Note that the script expect the gaussian outputs in the same directory
+where the input was submitted, with same filename and .out extension. The code will fail or malfunction otherwise.
+The option can be set in the beginning of the script.
+Note also that depending on your submission code the program may display output on the same shall where it was executed.
+
+Usage
+
+multi_coord_scan.py <gaussian input>.gjf
+The input structure should identical to gaussian scan calculations (opt=modred), however, the modred section after the
+geometry must start with "multicoord" keyword. Then the list of coordinates to be scanned are expected in same syntax
+to gaussian. Note that step numbers must be identical. Check the example if in doubt.
+CURRENTLY ONLY BONDS ARE IMPLEMENTED
+
+Further notes
+
+The program will create a subdirectory "scan" where gaussian jobs are run. Their names resemble the step and the index
+of the actually changing coordinate. The xyz file is created here at the end of calculation.
+There will be a file "logfile" in the parent directory containing useful information, as the PID of the background
+python process and the termination of gaussian jobs.
+In case of unexpected job failure the calculation can be relaunched as started. The normally terminated jobs will be
+skipped and reused.
+
+Feel free to check out the provided example at the github repository, and address questions to berta.denes@ttk.mta.hu.
