@@ -27,8 +27,10 @@ def checkOut(fout):
     with open(fout, 'rb') as outfile:
         if "termination" in tail(outfile):
             if "Error" in tail(outfile):
-                logging.info("Gaussian termination in error. Exiting.")
-                sys.exit(0)
+                logging.info(fout+" did not converged. Moving on.")
+                return True
+                # logging.info("Gaussian termination in error. Exiting.")
+                # sys.exit(0)
             else:
                 return True
         else:

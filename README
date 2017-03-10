@@ -8,7 +8,9 @@ The program creates an xyz file including the geometries and SCF energies (in kc
 Dependencies
 
 The program uses python3 environment and some of its packages, as well as cclib package version 1.4.
+https://cclib.github.io/
 Obviously, in order to perform the calculation one must have access to Gaussian (09) suite.
+http://gaussian.com/
 
 Help for dependencies
 
