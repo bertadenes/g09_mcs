@@ -108,6 +108,7 @@ def main():
     args = parser.parse_args()
     logging.basicConfig(filename = "logfile", level = logging.INFO, format='%(asctime)s %(message)s')
     MCsection = False
+    STDIN = True
     modred = []
     stdinput = []
     with open(args.inputfile,"r") as inp:
@@ -116,12 +117,16 @@ def main():
                 MCsection = False
             if MCsection:
                 modred.append(line.strip())
-            else:
+            if "multicoord" == line.strip():
+                STDIN = False
+            if STDIN:
                 stdinput.append(line)
-            if "multicoord" in line:
+            if "multicoord" == line.strip():
                 MCsection = True
 
-    stdinput = stdinput[:-2]
+
+    print(stdinput)
+    print(modred)
     coordinates = []
     steps = 0
     increments = []
